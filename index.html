@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- Meta / OG tags: 카카오톡·문자 링크 미리보기는 이 부분을 직접 읽습니다 (config.js가 아님). -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="서규원 ♥ 김여정 결혼합니다">
+  <meta property="og:description" content="2027년 3월 28일 일요일 오전 11시, 서울대학교 교수회관">
+  <meta property="og:image" content="https://rhinovibe.github.io/images/og/1.jpg">
+  <meta property="og:url" content="https://rhinovibe.github.io/">
+  <meta name="description" content="2027년 3월 28일 일요일 오전 11시, 서울대학교 교수회관">
+
+  <link rel="canonical" href="https://rhinovibe.github.io/">
+
+  <title>서규원 ♥ 김여정 결혼합니다</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Noto+Serif+KR:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=20261031-1">
+  <script src="config.js?v=20261031-2"></script>
+</head>
+<body>
+
+  <!-- ═══ Curtain Opening Animation ═══ -->
+  <div id="curtain" class="curtain">
+    <div class="curtain__left"></div>
+    <div class="curtain__right"></div>
+    <div class="curtain__content">
+      <p class="curtain__subtitle">Wedding Invitation</p>
+      <p class="curtain__names" id="curtainNames"></p>
+      <button class="curtain__btn" id="curtainBtn">초대장 열기</button>
+    </div>
+  </div>
+
+  <!-- ═══ Toast Notification ═══ -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <!-- Background music: Floral -gentle every day piano solo by HarumachiMusic (Pixabay). See AUDIO_LICENSE.md. -->
+  <audio id="backgroundMusic" src="audio/floral-gentle-every-day-piano-solo-509510.mp3" preload="auto" loop></audio>
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="배경음악 음소거" aria-pressed="false">
+    <svg class="music-toggle__icon music-toggle__icon--playing" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9 18V5l10-2v13M9 9l10-2M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3Zm10-2a3 3 0 1 1-3-3 3 3 0 0 1 3 3Z"/>
+    </svg>
+    <svg class="music-toggle__icon music-toggle__icon--muted" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9 18V5l10-2v13M9 9l10-2M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3Zm10-2a3 3 0 1 1-3-3 3 3 0 0 1 3 3Z"/>
+      <path d="m3 3 18 18"/>
+    </svg>
+  </button>
+
+  <!-- ═══ Photo Viewer Modal ═══ -->
+  <div id="photoModal" class="photo-modal" role="dialog" aria-modal="true" aria-label="사진 보기">
+    <button class="photo-modal__close" id="modalClose" aria-label="닫기">&times;</button>
+    <button class="photo-modal__nav photo-modal__nav--prev" id="modalPrev" aria-label="이전 사진">&#8249;</button>
+    <button class="photo-modal__nav photo-modal__nav--next" id="modalNext" aria-label="다음 사진">&#8250;</button>
+    <div class="photo-modal__container" id="modalContainer">
+      <img class="photo-modal__img" id="modalImg" src="" alt="사진" draggable="false">
+    </div>
+    <div class="photo-modal__counter" id="modalCounter"></div>
+  </div>
+
+  <!-- ═══ Main Content ═══ -->
+  <main id="mainContent" class="main-content">
+
+    <!-- ─── Hero Section ─── -->
+    <section class="section hero" id="hero">
+      <div class="hero__stage">
+        <div class="hero__overlay"></div>
+        <img class="hero__photo" id="heroPhoto" src="" alt="웨딩 사진" loading="eager">
+        <!-- Falling petals are clipped to the hero image area. -->
+        <canvas id="petalCanvas" class="petal-canvas"></canvas>
+        <div class="hero__content">
+          <p class="hero__label">Wedding Invitation</p>
+          <h1 class="hero__names" id="heroNames"></h1>
+          <div class="hero__divider"></div>
+          <p class="hero__date" id="heroDate"></p>
+          <p class="hero__venue" id="heroVenue"></p>
+        </div>
+
+      <!-- Countdown -->
+        <div class="countdown" id="countdown">
+        <p class="countdown__label" id="countdownLabel"></p>
+        <div class="countdown__timer">
+          <div class="countdown__item">
+            <span class="countdown__number" id="countDays">0</span>
+            <span class="countdown__unit">일</span>
+          </div>
+          <div class="countdown__sep">:</div>
+          <div class="countdown__item">
+            <span class="countdown__number" id="countHours">0</span>
+            <span class="countdown__unit">시간</span>
+          </div>
+          <div class="countdown__sep">:</div>
+          <div class="countdown__item">
+            <span class="countdown__number" id="countMinutes">0</span>
+            <span class="countdown__unit">분</span>
+          </div>
+          <div class="countdown__sep">:</div>
+          <div class="countdown__item">
+            <span class="countdown__number" id="countSeconds">0</span>
+            <span class="countdown__unit">초</span>
+          </div>
+        </div>
+        </div>
+
+        <div class="hero-opening" aria-hidden="true">
+          <div class="hero-opening__panel hero-opening__panel--top"></div>
+          <div class="hero-opening__panel hero-opening__panel--bottom"></div>
+          <div class="hero-opening__copy">
+            <p class="hero-opening__eyebrow">Wedding Invitation</p>
+            <p class="hero-opening__names" id="openingNames"></p>
+            <span class="hero-opening__ornament">✦</span>
+            <p class="hero-opening__date" id="openingDate"></p>
+          </div>
+          <div class="hero-opening__guide">
+            <span>Scroll to open</span>
+            <span class="hero-opening__arrow"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Greeting Section ─── -->
+    <section class="section greeting" id="greeting">
+      <div class="section__inner">
+        <div class="ornament animate-item" data-animate="fade-in">&#10047;</div>
+        <h2 class="section__title animate-item" data-animate="fade-up" id="greetingTitle"></h2>
+        <p class="greeting__text animate-item" data-animate="fade-up" id="greetingContent"></p>
+        <div class="greeting__parents animate-item" data-animate="fade-up" id="greetingParents"></div>
+      </div>
+    </section>
+
+    <!-- ─── Calendar Section ─── -->
+    <section class="section calendar-section" id="calendarSection">
+      <div class="section__inner">
+        <h2 class="section__title animate-item" data-animate="fade-up">예식 일시</h2>
+        <div class="calendar animate-item" data-animate="scale-in" id="calendarGrid"></div>
+        <div class="calendar-actions animate-item" data-animate="fade-up">
+          <a class="btn btn--outline" id="googleCalBtn" href="#" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+            Google 캘린더
+          </a>
+          <button class="btn btn--outline" id="icsDownloadBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 14v4M10 16l2 2 2-2"/></svg>
+            Apple 캘린더
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Gallery Section ─── -->
+    <section class="section gallery" id="gallery">
+      <div class="section__inner">
+        <h2 class="section__title animate-item" data-animate="fade-up">GALLERY</h2>
+        <div class="gallery-viewer animate-item" data-animate="fade-up" id="galleryViewer">
+          <div class="gallery__main-viewport" id="galleryMainViewport" aria-label="웨딩 갤러리" tabindex="0">
+            <div class="gallery__main-track" id="galleryMainTrack"></div>
+          </div>
+          <div class="gallery__thumb-shell">
+            <div class="gallery__thumb-viewport" id="galleryThumbViewport" aria-label="갤러리 사진 목록" tabindex="0">
+              <div class="gallery__thumb-track" id="galleryThumbTrack"></div>
+            </div>
+          </div>
+          <p class="sr-only" id="galleryStatus" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Location Section ─── -->
+    <section class="section location" id="location">
+      <div class="section__inner">
+        <h2 class="location__title animate-item" data-animate="fade-up">LOCATION</h2>
+        <div class="location__info animate-item" data-animate="fade-up">
+          <p class="location__venue" id="locationVenue"></p>
+          <p class="location__hall" id="locationHall"></p>
+          <div class="location__address-row">
+            <p class="location__address" id="locationAddress"></p>
+            <button class="location__copy" id="copyAddressBtn" type="button" aria-label="예식장 주소 복사">
+              <svg viewBox="0 0 11 13" aria-hidden="true">
+                <rect x="0.5" y="0.5" width="7.36" height="9.42"></rect>
+                <path d="M3.3 12.5h7.2V3.23"></path>
+              </svg>
+              <span>복사</span>
+            </button>
+          </div>
+          <p class="location__tel" id="locationTel"></p>
+        </div>
+        <div class="location__map animate-item" data-animate="scale-in">
+          <img class="location__map-img" id="locationMapImg" src="" alt="서울대학교 교수회관 약도 — 터치하면 크게 볼 수 있습니다" loading="lazy" role="button" tabindex="0">
+        </div>
+        <div class="location__links animate-item" data-animate="fade-up">
+          <a class="location-link" id="naverMapBtn" href="#" target="_blank" rel="noopener">
+            <span class="location-link__icon location-link__icon--naver" aria-hidden="true">N</span>
+            네이버 지도
+          </a>
+          <a class="location-link" id="kakaoMapBtn" href="#" target="_blank" rel="noopener">
+            <span class="location-link__icon location-link__icon--kakao" aria-hidden="true">K</span>
+            카카오맵
+          </a>
+        </div>
+        <div class="location-information animate-item" data-animate="fade-up" id="locationInformation" aria-label="교통 및 주차 안내"></div>
+      </div>
+    </section>
+
+    <!-- ─── Information Section ─── -->
+    <section class="section info-section" id="information">
+      <div class="info-section__inner">
+        <h2 class="info-section__heading animate-item" data-animate="fade-up">INFORMATION</h2>
+        <div class="info-carousel animate-item" data-animate="fade-up" id="infoCarousel" aria-roledescription="carousel" aria-label="예식 안내">
+          <div class="info-carousel__viewport">
+            <div class="info-carousel__track" id="infoCarouselTrack"></div>
+          </div>
+          <div class="info-carousel__dots" id="infoCarouselDots" aria-label="안내 카드 선택"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Account Section (축의금) ─── -->
+    <section class="section account" id="account">
+      <div class="section__inner">
+        <h2 class="section__title animate-item" data-animate="fade-up">마음 전하실 곳</h2>
+        <p class="account__desc animate-item" data-animate="fade-up">소중한 축하를 보내주셔서 감사드리며,<br>따뜻한 마음에 깊이 감사드립니다.</p>
+
+        <!-- Groom Accounts -->
+        <div class="accordion animate-item" data-animate="fade-up">
+          <button class="accordion__trigger" id="groomAccordion" aria-expanded="false">
+            <span class="accordion__label">신랑측 계좌번호</span>
+            <svg class="accordion__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion__panel" id="groomAccordionPanel">
+            <div class="accordion__panel-inner" id="groomAccountList"></div>
+          </div>
+        </div>
+
+        <!-- Bride Accounts -->
+        <div class="accordion animate-item" data-animate="fade-up">
+          <button class="accordion__trigger" id="brideAccordion" aria-expanded="false">
+            <span class="accordion__label">신부측 계좌번호</span>
+            <svg class="accordion__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion__panel" id="brideAccordionPanel">
+            <div class="accordion__panel-inner" id="brideAccountList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Guestbook Section (축하 전하기) ─── -->
+    <section class="section guestbook" id="guestbook">
+      <div class="section__inner">
+        <p class="guestbook__eyebrow animate-item" data-animate="fade-in">Guestbook</p>
+        <h2 class="section__title animate-item" data-animate="fade-up">축하 전하기</h2>
+        <p class="guestbook__desc animate-item" data-animate="fade-up">신랑 신부에게 축하의 한 마디를 남겨주세요.</p>
+
+        <button class="btn btn--outline guestbook__write animate-item" data-animate="fade-up"
+          id="guestbookWriteBtn" type="button">축하 글 남기기</button>
+
+        <p class="guestbook__status" id="guestbookStatus" role="status">축하글을 불러오는 중입니다.</p>
+        <div class="guestbook__list" id="guestbookList" aria-live="polite"></div>
+        <button class="guestbook__more btn btn--text" id="guestbookMoreBtn" type="button" hidden>이전 축하글 더보기 (0)</button>
+
+        <div class="guestbook-heart animate-item" data-animate="scale-in">
+          <p>하트를 눌러 축하해 주세요</p>
+          <button class="guestbook-heart__button" id="guestbookHeartBtn" type="button" aria-label="하트 누르기" aria-pressed="false">
+            <span class="guestbook-heart__icon" aria-hidden="true">♥</span>
+            <span class="guestbook-heart__count" id="guestbookHeartCount">0</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Attendance Section ─── -->
+    <section class="section rsvp" id="rsvp">
+      <div class="section__inner">
+        <h2 class="section__title animate-item" data-animate="fade-up">참석 여부 전달</h2>
+        <p class="rsvp__status animate-item" data-animate="fade-up" id="rsvpStatus">예식 참석 여부를 전달해 주세요.</p>
+        <button class="btn btn--outline rsvp__button animate-item" data-animate="fade-up"
+          id="rsvpOpenBtn" type="button">참석 여부 전달하기</button>
+        <button class="btn btn--outline rsvp__button animate-item" data-animate="fade-up"
+          id="rsvpEditBtn" type="button" hidden>전달 내용 수정하기</button>
+      </div>
+    </section>
+
+    <!-- ─── Kakao Share Section ─── -->
+    <section class="section share" id="share">
+      <div class="section__inner">
+        <p class="share__eyebrow animate-item" data-animate="fade-in">Share Our Invitation</p>
+        <h2 class="section__title animate-item" data-animate="fade-up">청첩장 공유하기</h2>
+        <p class="share__desc animate-item" data-animate="fade-up">소중한 분들께 저희의 소식을 전해 주세요.</p>
+        <button class="btn btn--kakao-share animate-item" data-animate="fade-up" id="kakaoShareBtn" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 3C6.48 3 2 6.58 2 11c0 2.88 1.9 5.4 4.75 6.81l-.97 3.56c-.08.32.28.58.56.39l4.25-2.81c.46.04.93.05 1.41.05 5.52 0 10-3.58 10-8S17.52 3 12 3Z"/>
+          </svg>
+          카카오톡으로 공유하기
+        </button>
+      </div>
+    </section>
+
+    <!-- ─── Footer ─── -->
+    <footer class="footer">
+      <p class="footer__text" id="footerText"></p>
+    </footer>
+
+  </main>
+
+  <dialog class="guestbook-dialog rsvp-dialog" id="rsvpDialog" aria-labelledby="rsvpDialogTitle" tabindex="-1">
+    <form class="guestbook-form rsvp-form" id="rsvpForm" method="dialog" novalidate>
+      <div class="guestbook-form__header">
+        <h2 id="rsvpDialogTitle">참석 여부 전달</h2>
+        <button class="guestbook-form__close" id="rsvpDialogClose" type="button" aria-label="닫기">×</button>
+      </div>
+
+      <fieldset class="rsvp-form__field">
+        <legend>구분</legend>
+        <div class="rsvp-form__segments rsvp-form__segments--two">
+          <label><input type="radio" name="side" value="groom" checked><span>신랑측</span></label>
+          <label><input type="radio" name="side" value="bride"><span>신부측</span></label>
+        </div>
+      </fieldset>
+
+      <label>
+        <span>성함</span>
+        <input id="rsvpName" name="name" type="text" maxlength="20" autocomplete="name" placeholder="성함을 입력해 주세요" required>
+      </label>
+
+      <fieldset class="rsvp-form__field">
+        <legend>참석 여부</legend>
+        <div class="rsvp-form__segments rsvp-form__segments--two">
+          <label><input type="radio" name="attendance" value="attending" checked><span>참석합니다</span></label>
+          <label><input type="radio" name="attendance" value="not_attending"><span>참석이 어렵습니다</span></label>
+        </div>
+      </fieldset>
+
+      <div class="rsvp-form__details" id="rsvpAttendanceDetails">
+        <label>
+          <span>참석 인원 <small>본인 포함</small></span>
+          <select id="rsvpGuestCount" name="guestCount" required>
+            <option value="1">1명</option>
+            <option value="2">2명</option>
+            <option value="3">3명</option>
+            <option value="4">4명</option>
+            <option value="5">5명</option>
+            <option value="6">6명</option>
+            <option value="7">7명</option>
+            <option value="8">8명</option>
+            <option value="9">9명</option>
+            <option value="10">10명</option>
+          </select>
+        </label>
+
+        <fieldset class="rsvp-form__field">
+          <legend>식사 여부</legend>
+          <div class="rsvp-form__segments rsvp-form__segments--three">
+            <label><input type="radio" name="meal" value="yes" checked><span>식사함</span></label>
+            <label><input type="radio" name="meal" value="no"><span>식사 안 함</span></label>
+            <label><input type="radio" name="meal" value="undecided"><span>미정</span></label>
+          </div>
+        </fieldset>
+      </div>
+
+      <label>
+        <span>전달사항 <small>선택</small></span>
+        <textarea id="rsvpNote" name="note" rows="3" maxlength="100" placeholder="필요한 내용이 있다면 남겨주세요"></textarea>
+      </label>
+
+      <p class="guestbook-form__error" id="rsvpFormError" role="alert"></p>
+      <button class="btn btn--primary guestbook-form__submit" id="rsvpSubmitBtn" type="submit">전달하기</button>
+    </form>
+  </dialog>
+
+  <dialog class="guestbook-dialog" id="guestbookDialog" aria-labelledby="guestbookDialogTitle">
+    <form class="guestbook-form" id="guestbookForm" method="dialog" novalidate>
+      <div class="guestbook-form__header">
+        <h2 id="guestbookDialogTitle">축하의 한 마디</h2>
+        <button class="guestbook-form__close" id="guestbookDialogClose" type="button" aria-label="닫기">×</button>
+      </div>
+      <label>
+        <span>이름</span>
+        <input id="guestbookName" name="name" type="text" maxlength="20" autocomplete="name" required>
+      </label>
+      <label>
+        <span>4자리 숫자 비밀번호</span>
+        <input id="guestbookPassword" name="password" type="password" inputmode="numeric" pattern="[0-9]{4}"
+          minlength="4" maxlength="4" autocomplete="new-password" required>
+      </label>
+      <label>
+        <span>축하의 한 마디</span>
+        <textarea id="guestbookMessage" name="message" rows="5" maxlength="300" required></textarea>
+      </label>
+      <p class="guestbook-form__error" id="guestbookFormError" role="alert"></p>
+      <button class="btn btn--primary guestbook-form__submit" id="guestbookSubmitBtn" type="submit">등록</button>
+    </form>
+  </dialog>
+
+  <dialog class="guestbook-dialog guestbook-dialog--small" id="guestbookDeleteDialog" aria-labelledby="guestbookDeleteTitle">
+    <form class="guestbook-form" id="guestbookDeleteForm" method="dialog" novalidate>
+      <div class="guestbook-form__header">
+        <h2 id="guestbookDeleteTitle">축하글 삭제</h2>
+        <button class="guestbook-form__close" id="guestbookDeleteClose" type="button" aria-label="닫기">×</button>
+      </div>
+      <label>
+        <span>작성할 때 입력한 4자리 비밀번호</span>
+        <input id="guestbookDeletePassword" name="password" type="password" inputmode="numeric" pattern="[0-9]{4}"
+          minlength="4" maxlength="4" autocomplete="current-password" required>
+      </label>
+      <p class="guestbook-form__error" id="guestbookDeleteError" role="alert"></p>
+      <button class="btn btn--primary guestbook-form__submit" id="guestbookDeleteSubmitBtn" type="submit">삭제</button>
+    </form>
+  </dialog>
+
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.8.2/kakao.min.js"
+    crossorigin="anonymous"></script>
+  <script src="script.js?v=20261031-2"></script>
+</body>
+</html>
