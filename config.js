@@ -135,14 +135,14 @@ const CONFIG = {
   // 우리 구글 시트에 Apps Script를 웹 앱으로 배포한 뒤 /exec 주소를 입력하세요.
   // 비워두면 "축하글 기능을 준비 중입니다"로 표시됩니다.
   guestbook: {
-    apiUrl: "",
+    apiUrl: "https://script.google.com/macros/s/AKfycbx1oLctwHi5msaN2RIQLa4jfpgLoiak3GciXEyGfAbqOwHg40cRDOjjM2K6vAfQ9R6t/exec",
     pageSize: 5
   },
 
   // ── 참석 여부 전달 ──
-  // 방명록과 같은 /exec 주소를 사용합니다. 비워두면 이 섹션은 숨겨집니다.
+  // 방명록과 같은 /exec 주소를 사용합니다. enabled를 true로 바꾸면 이 섹션이 나타납니다.
   rsvp: {
-    enabled: true,
+    enabled: false,
     apiUrl: ""
   },
 

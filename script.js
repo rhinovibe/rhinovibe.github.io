@@ -1750,8 +1750,10 @@
       const moreButton = $('#guestbookMoreBtn');
       moreButton.hidden = !guestbookState.nextCursor;
       moreButton.textContent = `이전 축하글 더보기 (${guestbookState.remainingCount})`;
-      $('#guestbookHeartCount').textContent = String(result.heartCount || 0);
-      $('#guestbookHeartBtn').setAttribute('aria-pressed', result.liked ? 'true' : 'false');
+      const heartCount = $('#guestbookHeartCount');
+      const heartToggle = $('#guestbookHeartBtn');
+      if (heartCount) heartCount.textContent = String(result.heartCount || 0);
+      if (heartToggle) heartToggle.setAttribute('aria-pressed', result.liked ? 'true' : 'false');
     } catch (error) {
       status.hidden = false;
       status.textContent = guestbookErrorMessage(
@@ -1778,7 +1780,7 @@
     const writeButton = $('#guestbookWriteBtn');
     const heartButton = $('#guestbookHeartBtn');
     writeButton.disabled = !enabled;
-    heartButton.disabled = !enabled;
+    if (heartButton) heartButton.disabled = !enabled;
 
     if (!enabled) {
       $('#guestbookStatus').textContent = '축하글 기능을 준비 중입니다.';
@@ -1895,7 +1897,7 @@
       }
     });
 
-    heartButton.addEventListener('click', async () => {
+    heartButton?.addEventListener('click', async () => {
       if (heartButton.getAttribute('aria-pressed') === 'true') {
         showToast('이미 하트를 보내주셨어요');
         return;
