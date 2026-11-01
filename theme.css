@@ -1,0 +1,103 @@
+/* ═══ 청첩장 색감: 화이트 아이보리 + 펄지 포인트 ═══
+   바탕은 화이트에 가까운 아이보리, 매트한 종이 결만 아주 옅게.
+   첫 화면 커버와 카드에만 펄지(진주빛 미세 입자, 무광) 마감을 포인트로 씁니다.
+   색을 바꾸고 싶으면 아래 :root 안의 값만 바꾸면 됩니다. */
+:root {
+  /* 바탕: 화이트 아이보리 */
+  --color-bg: #fdfcf9;
+  --color-bg-warm: #fbfaf6;
+  --color-bg-card: #faf8f4;
+  --color-info-bg: #f9f7f3;
+  --color-border: #ece7de;
+  --color-divider: #e4ded3;
+  --color-hover: #f6f3ec;
+  --color-selected: #fbf9f4;
+
+  /* 글자: 따뜻한 차콜 */
+  --color-text: #3b3631;
+  --color-text-light: #756d65;
+  --color-text-muted: #a59c92;
+  --text-rgb: 59, 54, 49;
+  --backdrop-rgb: 36, 32, 28;
+  --color-dark: #3b3631;
+  --color-dark-soft: #4b4540;
+
+  /* 포인트: 연한 샴페인 */
+  --color-accent: #b5a07c;
+  --color-accent-light: #e6dcc9;
+  --color-accent-dark: #8c7756;
+  --accent-rgb: 181, 160, 124;
+
+  /* 첫 화면 */
+  --opening-bg: #fdfcf9;
+  --opening-panel: #faf8f4;
+  --opening-panel-2: #faf8f4;
+  --opening-grad-a: #fffefc;
+  --opening-grad-b: #faf8f4;
+  --opening-ink: #3b342e;
+  --opening-gold: #c2ad88;
+  --opening-guide: #a59a88;
+
+  /* 달력 · 하트 · 꽃잎 */
+  --color-date-ring: #c23b3b;
+  --color-sunday: #c25b55;
+  --color-saturday: #7f8fa6;
+  --color-heart: #c23b3b;
+  --color-heart-border: #dfa7a0;
+  --color-heart-idle: #e8e2d8;
+  --color-petal: #fbf5ea;
+
+  /* 종이 결 · 펄 입자 (투명도 숫자를 키우면 진해짐) */
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E %3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E %3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='3' stitchTiles='stitch'/%3E %3CfeColorMatrix type='matrix' values='0 0 0 0 0.42 0 0 0 0 0.38 0 0 0 0 0.32 0.066 0 0 0 -0.027'/%3E %3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --pearl-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E %3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E %3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='3' stitchTiles='stitch'/%3E %3CfeColorMatrix type='matrix' values='0 0 0 0 0.42 0 0 0 0 0.38 0 0 0 0 0.32 0.11000000000000001 0 0 0 -0.045000000000000005'/%3E %3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --pearl-white: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E %3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E %3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='1' seed='11' stitchTiles='stitch'/%3E %3CfeColorMatrix type='matrix' values='0 0 0 0 1.000 0 0 0 0 1.000 0 0 0 0 1.000 1.6 0 0 0 -0.35'/%3E %3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0 0 0 0 0.550 1.000'/%3E%3C/feComponentTransfer%3E %3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  --pearl-mica: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='230' height='230'%3E %3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E %3CfeTurbulence type='fractalNoise' baseFrequency='1.0' numOctaves='1' seed='29' stitchTiles='stitch'/%3E %3CfeColorMatrix type='matrix' values='0 0 0 0 0.871 0 0 0 0 0.839 0 0 0 0 0.784 1.6 0 0 0 -0.35'/%3E %3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0 0 0 0 0.220 0.400'/%3E%3C/feComponentTransfer%3E %3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  /* 무광 진주빛: 움직이는 광택 없이, 진주층처럼 아주 옅게 비치는 빛 */
+  --pearl-glow: linear-gradient(125deg, rgba(250, 238, 234, 0.3) 0%, rgba(255, 255, 255, 0) 30%, rgba(238, 242, 246, 0.28) 62%, rgba(250, 244, 232, 0.3) 100%);
+  --pearl-paper: var(--pearl-white), var(--pearl-mica), var(--pearl-glow), var(--pearl-grain);
+}
+
+/* ─── 바탕: 매트한 화이트 아이보리 종이 ─── */
+.greeting, .location, .rsvp, .footer, .gallery {
+  background: var(--paper-grain), var(--color-bg);
+}
+.calendar-section, .account, .guestbook, .share {
+  background: var(--paper-grain), var(--color-bg-warm);
+}
+.info-section {
+  background: var(--paper-grain), var(--color-info-bg);
+}
+
+/* ─── 포인트: 펄지 마감 (첫 화면 커버 · 카드) ─── */
+.hero.opening-horizontal .hero-opening::before {
+  background: var(--paper-grain), var(--opening-bg);
+}
+.hero.opening-horizontal .hero-opening__panel--top,
+.hero.opening-horizontal .hero-opening__panel--bottom {
+  background: var(--pearl-paper), var(--opening-panel);
+}
+.calendar, .accordion, .guestbook-card, .info-carousel__viewport, .btn--outline, .guestbook-heart__button {
+  background: var(--pearl-paper), var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 1px 2px rgba(var(--text-rgb), 0.04), 0 6px 18px rgba(var(--text-rgb), 0.045);
+}
+
+/* ─── 달력: 예식일은 빨간 동그라미 테두리만 ─── */
+.calendar__day.is-today {
+  background: transparent;
+  color: var(--color-text);
+  font-weight: 600;
+  box-shadow: none;
+}
+.calendar__day.is-today::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.15rem;
+  height: 2.15rem;
+  border: 1.5px solid var(--color-date-ring);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}

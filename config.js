@@ -43,8 +43,8 @@ const CONFIG = {
 
   bride: {
     name: "김여정",
-    nameEn: "Kim Yeojeong",
-    openingName: "Yeojeong",
+    nameEn: "Kim Yeojung",
+    openingName: "Yeojung",
     father: "김정우",
     mother: "박미향",
     fatherDeceased: false,
@@ -57,29 +57,38 @@ const CONFIG = {
     venue: "서울대학교 교수회관",
     hall: "웨딩홀",
     address: "서울특별시 관악구 관악로 1 서울대학교 65동 교수회관",
-    tel: "[*]",
+    tel: "02-3285-2115",
     // 지도 버튼 링크. 비워두면 해당 버튼이 숨겨집니다. (티맵은 사용 안 함)
     mapLinks: {
       kakao: "https://place.map.kakao.com/11477726",
       naver: "https://naver.me/GSDAppGR",
       tmap: ""
     },
+    // 오시는 길 안내
+    //  - description: 일반 문장 (줄바꿈은 \n)
+    //  - routes: 역 이름 꼬리표 + 설명
+    //  - bullets: 점(•) 목록, { text, strong: true } 이면 굵게
     transportation: [
       {
-        title: "셔틀버스",
-        description: "[*]"
-      },
-      {
-        title: "지하철·버스",
-        description: "2호선 서울대입구역 3번 출구에서 5511번 버스 승차 후 '공동기기원' 하차\n신림선 관악산역 1번 출구에서 5516번 버스 승차 후 '공동기기원' 또는 '교수회관입구' 하차"
+        title: "대중교통",
+        routes: [
+          { label: "2호선 낙성대역", text: "4번 출구에서 GS주유소를 끼고 좌회전 후 우회전 → 제과점 앞에서 마을버스 2-1번 → '공동기기원' 정류장 하차" },
+          { label: "2호선 서울대입구역", text: "3번 출구에서 5511번 버스 → '공동기기원' 정류장 하차" },
+          { label: "신림선 관악산역", text: "1번 출구에서 5516번 버스 → '공동기기원' 또는 '교수회관입구' 정류장 하차" }
+        ]
       },
       {
         title: "주차 안내",
-        description: "서울대학교 교내 주차장을 이용하실 수 있으며,\n하객 주차권으로 2시간 무료 주차가 가능합니다."
+        description: "교수회관 내 주차장 이용 가능\n(하객 주차권으로 2시간 무료)"
       },
       {
         title: "유의 사항",
-        description: "낙성대역 인근의 '호암교수회관'과는 다른 곳이니\n오실 때 꼭 확인해 주세요."
+        bullets: [
+          "서울대입구역, 낙성대역에서 택시로 5~10분 소요됩니다.",
+          "서울대 후문을 지나 기숙사 삼거리에서 왼쪽으로 올라오십시오.",
+          "서울대 정문 진입 후 좌회전 – 직진 – 기숙사 삼거리에서 오른쪽 직진.",
+          { text: "낙성대 근처의 호암교수회관이 아닙니다.", strong: true }
+        ]
       }
     ]
   },
@@ -99,7 +108,7 @@ const CONFIG = {
   // ── 인사말 ──
   greeting: {
     title: "소중한 분들을 초대합니다",
-    content: "[*]"
+    content: "서로의 삶에 천천히 스며들어,\n어느새 가장 소중한 행복이 되었습니다.\n\n이제 우리의 내일을 나란히 그려가려 합니다.\n\n함께한 날들보다 더 많은 날들을 약속하는 이 봄,\n저희의 새로운 시작을 함께해 주시면 감사하겠습니다."
   },
 
   // ── 마음 전하실 곳 ──

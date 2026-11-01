@@ -305,6 +305,7 @@
     let width, height;
     const petals = [];
     const PETAL_COUNT = 25;
+    const petalColor = getComputedStyle(document.documentElement).getPropertyValue('--color-petal').trim() || '#e8c8b0';
     let animationFrameId = null;
     let isHeroVisible = true;
 
@@ -356,7 +357,7 @@
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation);
         ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = '#e8c8b0';
+        ctx.fillStyle = petalColor;
         ctx.beginPath();
         // Petal shape
         ctx.moveTo(0, 0);
@@ -1103,7 +1104,7 @@
 
   function initLocation() {
     const w = CONFIG.wedding;
-    const mapImagePath = 'images/location/1.jpg?v=20261031-1';
+    const mapImagePath = 'images/location/1.jpg?v=20261101-1';
     const mapImage = $('#locationMapImg');
     $('#locationVenue').textContent = w.venue;
     $('#locationHall').textContent = w.hall;
@@ -1135,9 +1136,35 @@
       title.className = 'location-information__title';
       title.textContent = item.title || '';
 
-      const description = document.createElement('p');
+      const description = document.createElement('div');
       description.className = 'location-information__description';
-      description.textContent = item.description || '';
+      if (item.description) {
+        const text = document.createElement('p');
+        text.textContent = item.description;
+        description.appendChild(text);
+      }
+      (item.routes || []).forEach((route) => {
+        const line = document.createElement('div');
+        line.className = 'location-information__route';
+        const label = document.createElement('span');
+        label.className = 'location-information__label';
+        label.textContent = route.label || '';
+        const text = document.createElement('p');
+        text.textContent = route.text || '';
+        line.append(label, text);
+        description.appendChild(line);
+      });
+      if (Array.isArray(item.bullets) && item.bullets.length) {
+        const list = document.createElement('ul');
+        list.className = 'location-information__bullets';
+        item.bullets.forEach((bullet) => {
+          const li = document.createElement('li');
+          li.textContent = typeof bullet === 'string' ? bullet : (bullet.text || '');
+          if (bullet && bullet.strong) li.classList.add('is-strong');
+          list.appendChild(li);
+        });
+        description.appendChild(list);
+      }
 
       row.append(title, description);
       information.appendChild(row);
