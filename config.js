@@ -140,9 +140,11 @@ const CONFIG = {
   },
 
   // ── 참석 여부 전달 ──
-  // 방명록과 같은 /exec 주소를 사용합니다. enabled를 true로 바꾸면 이 섹션이 나타납니다.
+  // 방명록과 같은 /exec 주소를 사용합니다. enabled를 false로 바꾸면 이 섹션이 숨겨집니다.
+  // autoPrompt: true면 하객이 방명록을 지나 내려갈 때 입력 창이 저절로 뜨고, false면 버튼을 눌러야만 뜹니다.
   rsvp: {
-    enabled: false,
+    enabled: true,
+    autoPrompt: false,
     apiUrl: ""
   },
 

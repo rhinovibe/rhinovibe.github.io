@@ -1572,7 +1572,7 @@
     updateAttendanceDetails();
     if (rsvpState.submitted) {
       loadExistingRsvp();
-    } else {
+    } else if (CONFIG.rsvp.autoPrompt === true) {
       const guestbookSection = $('#guestbook');
       if (guestbookSection) {
         autoPromptObserver = new IntersectionObserver((entries) => {
