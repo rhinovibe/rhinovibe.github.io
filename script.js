@@ -542,9 +542,7 @@
     const grid = $('#calendarGrid');
 
     // Header
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'];
-    grid.innerHTML = `<div class="calendar__header">${monthNames[month]} ${year}</div>`;
+    grid.innerHTML = `<div class="calendar__header">${year}년 ${month + 1}월</div>`;
 
     // Weekdays
     const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
@@ -1187,7 +1185,7 @@
     const dots = $('#infoCarouselDots');
     const items = CONFIG.information || [];
 
-    if (!items.length) {
+    if (!items.length || (CONFIG.sections && CONFIG.sections.information === false)) {
       section.hidden = true;
       return;
     }
@@ -1434,7 +1432,8 @@
   function initRsvp() {
     const dialog = $('#rsvpDialog');
     const form = $('#rsvpForm');
-    const enabled = Boolean(CONFIG.rsvp && CONFIG.rsvp.enabled !== false && rsvpApiUrl());
+    const enabled = Boolean(CONFIG.rsvp && CONFIG.rsvp.enabled !== false && rsvpApiUrl()
+      && !(CONFIG.sections && CONFIG.sections.rsvp === false));
     let autoPromptObserver = null;
 
     if (!enabled) {
@@ -1776,6 +1775,10 @@
   }
 
   function initGuestbook() {
+    if (CONFIG.sections && CONFIG.sections.guestbook === false) {
+      $('#guestbook').hidden = true;
+      return;
+    }
     const enabled = Boolean(CONFIG.guestbook && CONFIG.guestbook.apiUrl);
     const writeButton = $('#guestbookWriteBtn');
     const heartButton = $('#guestbookHeartBtn');

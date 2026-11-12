@@ -34,9 +34,9 @@
   --opening-panel-2: #faf8f4;
   --opening-grad-a: #fffefc;
   --opening-grad-b: #faf8f4;
-  --opening-ink: #3b342e;
-  --opening-gold: #c2ad88;
-  --opening-guide: #a59a88;
+  --opening-ink: #44352a;   /* 원본 오프닝 글자색 (짙은 갈색) */
+  --opening-gold: #d2b17e;  /* 원본 장식·화살표 금색 */
+  --opening-guide: #8e7b66; /* 원본 안내 문구 색 */
 
   /* 달력 · 하트 · 꽃잎 */
   --color-date-ring: #c23b3b;

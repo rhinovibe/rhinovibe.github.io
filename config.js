@@ -19,6 +19,13 @@ const CONFIG = {
   // ── 초대장 열기 ──
   useCurtain: false,  // 초대장 열기 화면 사용 여부 (true: 사용, false: 바로 본문 표시)
 
+  // ── 섹션 보이기/숨기기 (true: 보임, false: 숨김) ──
+  sections: {
+    information: false,  // 예식 안내 카드 (공지할 내용이 생기면 true)
+    guestbook: false,    // 축하 전하기
+    rsvp: false          // 참석 여부 전달
+  },
+
   // ── 이미지 리소스 ──
   // 사진 교체 시 count를 실제 파일 수에 맞춰 주세요.
   images: {
@@ -34,7 +41,7 @@ const CONFIG = {
   groom: {
     name: "서규원",
     nameEn: "Seo Kyuwon",
-    openingName: "Kyuwon",   // 첫 화면에 크게 나오는 영문 이름
+    openingName: "Kyuwon",   // 오프닝 화면에 크게 나오는 영문 이름 (대문자로 표시)
     father: "서원욱",
     mother: "이창열",
     fatherDeceased: false,
@@ -114,7 +121,7 @@ const CONFIG = {
   // ── 마음 전하실 곳 ──
   accounts: {
     groom: [
-      { role: "신랑", name: "서규원", bank: "[*]", number: "[*]" },
+      { role: "신랑", name: "서규원", bank: "신한은행", number: "110-451-654907" },
       { role: "아버지", name: "서원욱", bank: "[*]", number: "[*]" },
       { role: "어머니", name: "이창열", bank: "[*]", number: "[*]" }
     ],
