@@ -242,6 +242,9 @@
             title: CONFIG.meta.title,
             description: CONFIG.meta.description,
             imageUrl: share.imageUrl,
+            ...(share.imageWidth && share.imageHeight
+              ? { imageWidth: share.imageWidth, imageHeight: share.imageHeight }
+              : {}),
             link: {
               mobileWebUrl: share.url,
               webUrl: share.url

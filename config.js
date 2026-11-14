@@ -135,7 +135,7 @@ const CONFIG = {
   // ── 링크 공유 시 나타나는 문구 ──
   meta: {
     title: "서규원 ♥ 김여정 결혼합니다",
-    description: "2027년 3월 28일 일요일 오전 11시, 서울대학교 교수회관"
+    description: "2027년 3월 28일 일요일 오전 11시\n서울대학교 교수회관"
   },
 
   // ── 축하 전하기 (방명록) ──
@@ -161,7 +161,10 @@ const CONFIG = {
   kakaoShare: {
     javascriptKey: "4677e6d32b86959c8a067d932bce8c9b",
     url: "https://rhinovibe.github.io/",
-    imageUrl: "https://rhinovibe.github.io/images/og/1.jpg",
+    // 정사각형(1:1) 썸네일: 사진 전체를 가운데 두고 양옆은 같은 사진을 흐리게 채움
+    imageUrl: "https://rhinovibe.github.io/images/og/1.jpg?v=20261114",
+    imageWidth: 1024,
+    imageHeight: 1024,
     buttonTitle: "청첩장 보기"
   }
 };
