@@ -161,7 +161,10 @@ const CONFIG = {
   kakaoShare: {
     javascriptKey: "4677e6d32b86959c8a067d932bce8c9b",
     url: "https://rhinovibe.github.io/",
-    imageUrl: "https://rhinovibe.github.io/images/og/1.jpg?v=20261114-2",
+    // 카톡 썸네일: 오프닝 사진을 정사각형(1:1)으로 미리 자른 그림
+    imageUrl: "https://rhinovibe.github.io/images/og/1.jpg?v=20261114-3",
+    imageWidth: 800,
+    imageHeight: 800,
     buttonTitle: "청첩장 보기"
   }
 };
