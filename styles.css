@@ -845,6 +845,15 @@ a {
   margin-bottom: var(--spacing-xl);
 }
 
+.greeting__paragraph {
+  display: block;
+}
+
+/* 문단 사이 간격: 예전 빈 줄(줄 높이 2em)의 절반 */
+.greeting__paragraph + .greeting__paragraph {
+  margin-top: 1em;
+}
+
 .greeting__parents {
   font-size: 0.875rem;
   font-weight: 300;

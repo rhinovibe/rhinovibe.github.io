@@ -507,7 +507,15 @@
 
   function initGreeting() {
     $('#greetingTitle').textContent = CONFIG.greeting.title;
-    $('#greetingContent').textContent = CONFIG.greeting.content;
+    // 빈 줄(\n\n)로 나뉜 문단을 따로 그려서 문단 사이 간격을 CSS로 조절
+    const greetingContent = $('#greetingContent');
+    greetingContent.textContent = '';
+    String(CONFIG.greeting.content || '').split(/\n\s*\n/).forEach((paragraph) => {
+      const block = document.createElement('span');
+      block.className = 'greeting__paragraph';
+      block.textContent = paragraph;
+      greetingContent.appendChild(block);
+    });
 
     const g = CONFIG.groom;
     const b = CONFIG.bride;
@@ -1357,9 +1365,9 @@
   function initFooter() {
     const dt = getWeddingDateTime();
     const year = dt.getFullYear();
-    const month = String(dt.getMonth() + 1).padStart(2, '0');
-    const day = String(dt.getDate()).padStart(2, '0');
-    $('#footerText').textContent = `${CONFIG.groom.name} & ${CONFIG.bride.name} — ${year}.${month}.${day}`;
+    const month = dt.getMonth() + 1;
+    const day = dt.getDate();
+    $('#footerText').textContent = `${CONFIG.groom.name} & ${CONFIG.bride.name} — ${year}. ${month}. ${day}.`;
   }
 
   /* ═══════════════════════════════════════════
