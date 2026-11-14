@@ -12,7 +12,7 @@
  *   images/location/1.jpg  - 약도/지도 이미지 (1장)
  *   images/og/1.jpg        - 카카오톡 공유 썸네일 (1장)
  *
- * ※ 사진은 아직 친구 청첩장 사진 그대로입니다. 공개 전에 반드시 교체하세요.
+ * 사진 원본: Wedding\모청\모청 사진 (opening → 메인 사진, 1~29 → 갤러리 순서)
  */
 
 const CONFIG = {
@@ -30,7 +30,7 @@ const CONFIG = {
   // 사진 교체 시 count를 실제 파일 수에 맞춰 주세요.
   images: {
     gallery: {
-      count: 21,
+      count: 29,
       thumbPath: "images/gallery/thumb",
       displayPath: "images/gallery/display",
       fullPath: "images/gallery/full"
