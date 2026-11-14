@@ -161,10 +161,7 @@ const CONFIG = {
   kakaoShare: {
     javascriptKey: "4677e6d32b86959c8a067d932bce8c9b",
     url: "https://rhinovibe.github.io/",
-    // 정사각형(1:1) 썸네일: 사진 전체를 가운데 두고 양옆은 같은 사진을 흐리게 채움
-    imageUrl: "https://rhinovibe.github.io/images/og/1.jpg?v=20261114",
-    imageWidth: 1024,
-    imageHeight: 1024,
+    imageUrl: "https://rhinovibe.github.io/images/og/1.jpg?v=20261114-2",
     buttonTitle: "청첩장 보기"
   }
 };
