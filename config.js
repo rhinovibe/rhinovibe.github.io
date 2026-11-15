@@ -122,13 +122,13 @@ const CONFIG = {
   accounts: {
     groom: [
       { role: "신랑", name: "서규원", bank: "신한은행", number: "110-451-654907" },
-      { role: "아버지", name: "서원욱", bank: "[*]", number: "[*]" },
-      { role: "어머니", name: "이창열", bank: "[*]", number: "[*]" }
+      { role: "아버지", name: "서원욱", bank: "신한은행", number: "110-009-196242" },
+      { role: "어머니", name: "이창열", bank: "신한은행", number: "110-185-086350" }
     ],
     bride: [
-      { role: "신부", name: "김여정", bank: "[*]", number: "[*]" },
-      { role: "아버지", name: "김정우", bank: "[*]", number: "[*]" },
-      { role: "어머니", name: "박미향", bank: "[*]", number: "[*]" }
+      { role: "신부", name: "김여정", bank: "우리은행", number: "1002-456-665090" },
+      { role: "아버지", name: "김정우", bank: "국민은행", number: "022-01-0399-181" },
+      { role: "어머니", name: "박미향", bank: "제일은행", number: "157-20-364041" }
     ]
   },
 
